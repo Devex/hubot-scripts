@@ -50,7 +50,11 @@ module.exports = (robot) ->
 
 announcePullRequest = (data, cb) ->
   if data.action == 'opened'
-    mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-\/]+)/g)
+
+    if data.pull_request.body
+      mentioned = data.pull_request.body.match(/(^|\s)(@[\w\-\/]+)/g)
+    else
+      mentioned = false
 
     if mentioned
       unique = (array) ->
